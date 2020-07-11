@@ -4,9 +4,9 @@
   "description": "This is a test directory to learn react.",
   "main": "index.html",
   "scripts": {
-    "start":"npm run lite",
-    "test" : "echo \"Error: no test specified\" && exit 1",
-    "lite" : "lite-server"
+    "start": "npm run lite",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lite": "lite-server"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,8 @@
   "homepage": "https://github.com/deepesh-01/coursera_react#readme",
   "devDependencies": {
     "lite-server": "^2.5.4"
+  },
+  "dependencies": {
+    "create-react-app": "^3.4.1"
   }
 }
