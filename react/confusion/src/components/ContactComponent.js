@@ -73,7 +73,7 @@ class Contact extends Component {
         if(this.state.touched.telnum && !reg.test(telnum)){
             errors.telnum = 'Tel. number should contain numbers only.'
         }
-        if(this.state.touched.email && email.split('').filter(x=> x = '@').length == 1){
+        if(this.state.touched.email && email.split('').filter(x => x === '@').length !== 1){
             errors.email = 'Please enter valid email.'
         }
         console.log();
