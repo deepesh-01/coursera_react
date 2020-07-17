@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardImg, cardImgOverlay, CardText, CardBody, CardTitle,
-         Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Row, Input, Label, Col } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle,
+         Button, Modal, ModalHeader, ModalBody, FormGroup, Label, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
@@ -24,8 +24,10 @@ class CommentForm extends React.Component {
             isModalOpen: !this.state.isModalOpen 
         });
     }
-    handleSubmit(event) {
+    handleSubmit(values) {
         this.toggleModal();
+        alert("Current state is :" + JSON.stringify(values));
+        
     }
     
     render() {
@@ -38,7 +40,7 @@ class CommentForm extends React.Component {
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
                     <ModalBody>
-                        <LocalForm onSubmit={this.handleSubmit}>
+                        <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
                             <FormGroup>
                                 <Label htmlFor="Rating" md={6}>Rating</Label>
                                 <Col md={12}>
@@ -61,7 +63,8 @@ class CommentForm extends React.Component {
                                         model=".author" id="author" name="author" rows="12"
                                         placeholder="Your Name" className="form-control"
                                         validators={{minLength: minLength(3),
-                                             maxLength: maxLength(15)}}/>
+                                                     maxLength: maxLength(15)}}
+                                        />
                                     <Errors
                                         className="text-danger" model=".author" show="touched"
                                         messages={{
@@ -77,7 +80,7 @@ class CommentForm extends React.Component {
                                     <Control.textarea
                                         model=".comment" id="comment" name="comment"
                                         rows="6" className="form-control"
-                                    />
+                                        />
                                 </Col>
                             </FormGroup>
                             <Button type="submit" value="submit" color="primary">Submit</Button>
@@ -139,7 +142,7 @@ const Dishdetail = (props) => {
                 <div className="row">
                     <Breadcrumb>
                         <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
-                        <BreadcrumbItem><Link to='/menu'>Home</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to='/menu'>Menu</Link></BreadcrumbItem>
                         <BreadcrumbItem active>{props.dish.name}Menu</BreadcrumbItem>
                     </Breadcrumb>
                     <div className="col-12">
