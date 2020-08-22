@@ -3,15 +3,15 @@ import {Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle} from 'reacts
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
 
-function RenderCard({item, isLoading, errorMess}){
+function RenderCard({item, isLoading, errMess}){
     if(isLoading){
         return(
             <Loading></Loading>
         );
     }
-    else if(errorMess){
+    else if(errMess){
         return(
-        <h4>{errorMess}</h4>
+        <h4>{errMess}</h4>
         );
     }
     else {
@@ -39,12 +39,12 @@ function Home(props){
                 <div className="col-12 col-md m-1">
                     <RenderCard item={props.dish}
                                 isLoading={props.dishesLoading}
-                                errorMess={props.dishesErrMess}></RenderCard>
+                                errMess={props.dishesErrMess}></RenderCard>
                 </div>
                 <div className="col-12 col-md m-1">
                     <RenderCard item={props.promotions}
                                 isLoading={props.promosLoading}
-                                errorMess={props.promosErrMess}></RenderCard>
+                                errMess={props.promosErrMess}></RenderCard>
                </div>
                <div className="col-12 col-md m-1">
                     <RenderCard item={props.leader}></RenderCard>
