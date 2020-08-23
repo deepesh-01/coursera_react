@@ -145,3 +145,83 @@ export const addPromos = (promos) => ({
     type: ActionTypes.ADD_PROMOS,
     payload: promos
 });
+
+export const fetchLeaders = () => (dispatch) => {
+    dispatch(leadersLoading());
+    return fetch(baseUrl + 'leaders')
+        .then(respose => {
+            if (respose.ok){
+                return respose;
+            }
+            else{
+                var error = new Error('Error ' + respose.status + ':' + respose.statusText);
+                error.respose = respose;
+                throw error;
+            }
+        }, 
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(respose => respose.json())
+        .then(leaders => dispatch(addLeaders(leaders)))
+        .catch(error => dispatch(leadersFailed(error.message)))
+}
+
+export const leadersLoading = () => ({
+    type: ActionTypes.LEADERS_LOADING
+});
+
+export const leadersFailed = (errmess) => ({
+    type: ActionTypes.LEADERS_FAILED,
+    payload: errmess 
+});
+
+export const addLeaders = (leaders) => ({
+    type: ActionTypes.ADD_LEADERS,
+    payload: leaders
+});
+
+export const addFeedback = (feedback) =>({
+    type: ActionTypes.ADD_FEEDBACK,
+    payload: feedback
+});
+
+export const postFeedback = (id,firstname,lastname,telnum,email,message) =>  (dispatch) => {
+    const newFeedback = {
+            id : id,
+            firstname: firstname,
+            lastname: lastname,
+            telnum: telnum,
+            email: email,
+            message:message,
+    }
+     newFeedback.date = new Date().toISOString();
+
+     return fetch(baseUrl + 'feedback',{
+         method:'POST',
+         body: JSON.stringify(newFeedback),
+         headers:{
+             'Content-Type' : 'application/json'
+         },
+         credential: 'same-origin'
+     })
+     .then(respose => {
+        if (respose.ok){
+            return respose;
+        }
+        else{
+            var error = new Error('Error ' + respose.status + ':' + respose.statusText);
+            error.respose = respose;
+            throw error;
+        }
+    }, 
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+    })
+    .then(respose => respose.json())
+    .then(respose => dispatch(addFeedback(respose)))
+    .catch(error => {console.log('Post Feedback', error.message)
+                    alert('Your feedback Could not be posted\nError: '+ error.message)})
+}
