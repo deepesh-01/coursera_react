@@ -1,5 +1,5 @@
 {
-  "homepage": "http://gitname.github.io/react-gh-pages"
+  "homepage": "http://gitname.github.io/react-gh-pages",
   "name": "coursera_react",
   "version": "1.0.0",
   "description": "This is a test directory to learn react.",
@@ -7,7 +7,7 @@
   "scripts": {
     "start": "npm run lite",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lite": "lite-server"
+    "lite": "lite-server",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
